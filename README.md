@@ -12,12 +12,12 @@ So given args `-d10 -b lINFO`
 ```c#
 Args args = new Args("-d10 -b -lINFO", new Schema("d#,b,l*"));
 
-// Following works
-Maybe<int> maybeSomeIntarg = args.Integer("d")
-maybeSomeIntarg.HasValue            // True
-maybeSomeIntarg.Value               // 10
+// Fetch arg's value
+Maybe<int> maybeSomeIntArg = args.Integer("d")
+maybeSomeIntArg.HasValue                    // True
+maybeSomeIntArg.Value                       // 10
 
-// But this doesn't!
+// Can't fetch for non existing arg
 Maybe<string> maybeSomeAnotherStringArg = args.String("p")
-maybeSomeAnotherStringArg.HasValue  // False
+maybeSomeAnotherStringArg.HasValue          // False
 ```
