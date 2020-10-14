@@ -28,8 +28,7 @@ namespace Tests
         [InlineData("d#,j,f*,w*,t*,m#,b")]
         public void Create_if_valid_schema_provided(string schema)
         {
-            var someSchema = new Schema(schema);
-            Assert.NotNull(someSchema);
+            Assert.NotNull(new Schema(schema));
         }
     }
 }

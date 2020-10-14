@@ -6,19 +6,16 @@ namespace Domain
     public class IntArg : Arg
     {
         private const int ValueGroupIndex = 1;
-        private readonly string _name;
+        private readonly Regex _intArgRegex;
 
         public IntArg(string name)
         {
-            _name = name;
+            _intArgRegex = new Regex(@$"-{name}(\S+)");
         }
 
         public Maybe<object> Value(string args)
         {
-            return int.TryParse(
-                new Regex(@$"-{_name}(\S+)").Match(args).Groups[ValueGroupIndex].Value,
-                out var value
-            )
+            return int.TryParse(_intArgRegex.Match(args).Groups[ValueGroupIndex].Value, out var value)
                 ? Maybe<int>.From(value)
                 : Maybe<int>.None;
         }

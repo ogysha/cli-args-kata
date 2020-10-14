@@ -6,16 +6,16 @@ namespace Domain
     public class StringArg : Arg
     {
         private const int ValueGroupIndex = 1;
-        private readonly string _name;
+        private readonly Regex _stringArgRegex;
 
         public StringArg(string name)
         {
-            _name = name;
+            _stringArgRegex = new Regex(@$"-{name}(\S+)");
         }
 
         public Maybe<object> Value(string args)
         {
-            return new Regex(@$"-{_name}(\S+)")
+            return _stringArgRegex
                 .Match(args)
                 .Groups[ValueGroupIndex]
                 .Value;

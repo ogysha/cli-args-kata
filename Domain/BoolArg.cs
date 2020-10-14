@@ -5,16 +5,16 @@ namespace Domain
 {
     public class BoolArg : Arg
     {
-        private readonly string _name;
+        private readonly Regex _boolArgRegex;
 
         public BoolArg(string name)
         {
-            _name = name;
+            _boolArgRegex = new Regex($@"-{name}(\s+|$)");
         }
 
         public Maybe<object> Value(string args)
         {
-            return new Regex($@"-{_name}(\s+|$)").IsMatch(args);
+            return _boolArgRegex.IsMatch(args);
         }
     }
 }

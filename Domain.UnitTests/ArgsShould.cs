@@ -17,11 +17,15 @@ namespace Tests
             string stringArg,
             IEnumerable<Maybe<object>> expectedValues)
         {
-            var actual = new List<Maybe<object>>
-            {
-                args.Boolean(boolArg), args.Integer(intArg), args.String(stringArg)
-            };
-            Assert.Equal(expectedValues, actual);
+            Assert.Equal(
+                expectedValues,
+                new List<Maybe<object>>
+                {
+                    args.Boolean(boolArg),
+                    args.Integer(intArg),
+                    args.String(stringArg)
+                }
+            );
         }
     }
 }

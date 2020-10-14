@@ -24,9 +24,10 @@ namespace Domain
 
         public Maybe<int> Integer(string arg)
         {
-            return (Maybe<int>) _schema.IntArg(arg)
+            return _schema.IntArg(arg)
                 .Map(foundArg => foundArg.Value(_args))
-                .Unwrap()
+                .Map(maybeValue => maybeValue.Value)
+                .Map(maybeObjectResult => (Maybe<int>) maybeObjectResult)
                 .Unwrap();
         }
 

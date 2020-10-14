@@ -7,6 +7,7 @@ namespace Domain
 {
     public class Schema
     {
+        private const int ArgNameGroupIndex = 1;
         private const string ArgSeparator = ",";
         private readonly char[] _allowedArgSchemaSuffixes = {'#', '*'};
         private readonly string[] _schemaArgs;
@@ -19,11 +20,11 @@ namespace Domain
 
             if (matchedArgs.Count != args.Length)
             {
-                throw new ArgumentException(nameof(schema));
+                throw new ArgumentException("Schema contains one or more invalid arg definitions");
             }
 
             if (matchedArgs
-                .Select(match => match.Groups[1].Value)
+                .Select(match => match.Groups[ArgNameGroupIndex].Value)
                 .Select(argSchema => argSchema.TrimEnd(_allowedArgSchemaSuffixes))
                 .Distinct()
                 .Count() != args.Length)
