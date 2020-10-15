@@ -5,7 +5,7 @@ namespace Domain
 {
     public class IntArg : Arg
     {
-        private const int ValueGroupIndex = 1;
+        private const int IntValueGroupIndex = 1;
         private readonly Regex _intArgRegex;
 
         public IntArg(string name)
@@ -15,7 +15,7 @@ namespace Domain
 
         public Maybe<object> Value(string args)
         {
-            return int.TryParse(_intArgRegex.Match(args).Groups[ValueGroupIndex].Value, out var value)
+            return int.TryParse(_intArgRegex.Match(args).Groups[IntValueGroupIndex].Value, out var value)
                 ? Maybe<int>.From(value)
                 : Maybe<int>.None;
         }

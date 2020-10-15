@@ -5,7 +5,7 @@ namespace Domain
 {
     public class StringArg : Arg
     {
-        private const int ValueGroupIndex = 1;
+        private const int StringValueGroupIndex = 1;
         private readonly Regex _stringArgRegex;
 
         public StringArg(string name)
@@ -17,7 +17,7 @@ namespace Domain
         {
             return _stringArgRegex
                 .Match(args)
-                .Groups[ValueGroupIndex]
+                .Groups[StringValueGroupIndex]
                 .Value;
         }
     }

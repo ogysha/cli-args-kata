@@ -4,7 +4,7 @@ Parse CLI args into a convenient data structure:
 Example:
 
 The schema `"d#,b,l*"` specifies an int arg `-d`, a bool arg `-b`, and a string arg `-l`  
-So given args `-d10 -b lINFO`
+So given args `-d10 -b -lINFO`
 * the arg `-d` has the value `10`
 * the arg `-b` has the value `true`
 * the arg `-l` has the value `"INFO"`
