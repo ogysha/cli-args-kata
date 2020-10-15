@@ -18,8 +18,10 @@ namespace Domain
         {
             return _schema.BoolArg(arg)
                 .Map(foundArg => foundArg.Value(_args))
-                .Map(maybeValue => maybeValue.Value)
-                .Map(value => (bool) value);
+                .Map(value => value.Match(
+                        itsTrue => (bool) itsTrue,
+                        () => Maybe<bool>.None)
+                    .Unwrap());
         }
 
         public Maybe<int> Integer(string arg)
@@ -27,8 +29,10 @@ namespace Domain
             return _schema.IntArg(arg)
                 .Map(foundArg => foundArg.Value(_args))
                 .Map(maybeValue => maybeValue.Value)
-                .Map(maybeObjectResult => (Maybe<int>) maybeObjectResult)
-                .Unwrap();
+                .Match(
+                    maybeValue => (Maybe<int>) maybeValue,
+                    () => Maybe<int>.None
+                );
         }
 
         public Maybe<string> String(string arg)
@@ -36,7 +40,10 @@ namespace Domain
             return _schema.StringArg(arg)
                 .Map(foundArg => foundArg.Value(_args))
                 .Map(maybeValue => maybeValue.Value)
-                .Map(value => (string) value);
+                .Match(
+                    value => (string) value,
+                    () => Maybe<string>.None
+                );
         }
     }
 }

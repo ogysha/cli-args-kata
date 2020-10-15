@@ -14,7 +14,9 @@ namespace Domain
 
         public Maybe<object> Value(string args)
         {
-            return _boolArgRegex.IsMatch(args);
+            return _boolArgRegex.IsMatch(args)
+                ? Maybe<object>.From(true)
+                : Maybe<object>.None;
         }
     }
 }
